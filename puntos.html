@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Administración de Puntos</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; color: #333; }
+  h1, h2 { color: #2c3e50; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+  table, th, td { border: 1px solid #aaa; }
+  th, td { padding: 10px; text-align: left; }
+  th { background-color: #3498db; color: white; }
+  form { margin-bottom: 30px; padding: 10px; background-color: #ecf0f1; border-radius: 8px; }
+  label { display: block; margin: 5px 0 2px; }
+  input[type="text"], input[type="number"] { width: 250px; padding: 5px; margin-bottom: 10px; }
+  button { padding: 8px 15px; background-color: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer; }
+  button:hover { background-color: #2980b9; }
+  #nuevoJSON { margin-top: 10px; font-weight: bold; color: #e74c3c; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+
+<h1>Administración de Puntos</h1>
+
+<h2>Registrar compra (sumar puntos)</h2>
+<form id="formCompra">
+  <label>Número de WhatsApp</label>
+  <input type="text" id="whatsappCompra" placeholder="Ej: 5493764217476" required>
+  <label>Monto de la compra</label>
+  <input type="number" id="montoCompra" placeholder="Ej: 8500" required>
+  <label>Número de WhatsApp del referido (opcional)</label>
+  <input type="text" id="whatsappReferido" placeholder="Ej: 5493764000000">
+  <button type="submit">Sumar puntos</button>
+</form>
+
+<h2>Canjear puntos (restar)</h2>
+<form id="formCanje">
+  <label>Número de WhatsApp</label>
+  <input type="text" id="whatsappCanje" placeholder="Ej: 5493764217476" required>
+  <label>Puntos a restar</label>
+  <input type="number" id="puntosRestar" placeholder="Ej: 500" required>
+  <button type="submit">Restar puntos</button>
+</form>
+
+<h2>Clientes y puntos</h2>
+<table id="tablaPuntos">
+  <thead>
+    <tr>
+      <th>WhatsApp</th>
+      <th>Puntos actuales ($)</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<button id="copiarJSON">📋 Copiar JSON actualizado</button>
+<p id="nuevoJSON"></p>
+
+<script>
+let clientes = [];
+
+function cargarClientes() {
+  fetch('puntos.json?' + new Date().getTime(), { cache: "no-store" })
+    .then(res => res.json())
+    .then(data => {
+      clientes = data;
+      actualizarTabla();
+    })
+    .catch(err => console.error("Error cargando puntos:", err));
+}
+
+function actualizarTabla() {
+  const tbody = document.querySelector('#tablaPuntos tbody');
+  tbody.innerHTML = '';
+  clientes.forEach(c => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${c.whatsapp}</td>
+      <td>${c.puntos}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function buscarCliente(whatsapp) {
+  return clientes.find(c => c.whatsapp === whatsapp);
+}
+
+/* --- Lógica de sumar puntos (con referidos) --- */
+document.getElementById('formCompra').addEventListener('submit', function(e){
+  e.preventDefault();
+  const whatsapp = document.getElementById('whatsappCompra').value.trim();
+  const monto = parseFloat(document.getElementById('montoCompra').value.trim());
+  const whatsappReferido = document.getElementById('whatsappReferido').value.trim();
+
+  if (!whatsapp || isNaN(monto) || monto <= 0) {
+    alert('Datos inválidos.');
+    return;
+  }
+
+  const puntosCliente = Math.floor(monto * 0.20);
+  const puntosReferido = Math.floor(monto * 0.05);
+
+  let cliente = buscarCliente(whatsapp);
+  let referido = whatsappReferido ? buscarCliente(whatsappReferido) : null;
+
+  if (!cliente) {
+    // Cliente nuevo → gana siempre 20%
+    cliente = { whatsapp: whatsapp, puntos: puntosCliente };
+    clientes.push(cliente);
+
+    // Si existe un referido válido, gana el 5%
+    if (referido) {
+      referido.puntos += puntosReferido;
+      actualizarTabla();
+      mostrarJSON();
+      alert(`✅ Cliente nuevo. Se sumaron ${puntosCliente} pts a ${whatsapp}.\n✅ Referido ${whatsappReferido} recibió ${puntosReferido} pts.\nSaldo referido ahora: ${referido.puntos} pts.`);
+      return;
+    } else {
+      actualizarTabla();
+      mostrarJSON();
+      alert(`✅ Cliente nuevo. Se sumaron ${puntosCliente} pts a ${whatsapp}.`);
+      return;
+    }
+  } else {
+    // Cliente ya existente → solo suma el 20%
+    cliente.puntos += puntosCliente;
+    actualizarTabla();
+    mostrarJSON();
+    alert(`✅ Cliente existente. Se sumaron ${puntosCliente} pts a ${whatsapp}.\nSaldo actual: ${cliente.puntos} pts.`);
+    return;
+  }
+});
+
+/* --- Lógica de restar puntos (verifica saldo) --- */
+document.getElementById('formCanje').addEventListener('submit', function(e){
+  e.preventDefault();
+  const whatsapp = document.getElementById('whatsappCanje').value.trim();
+  const puntosRestar = parseInt(document.getElementById('puntosRestar').value.trim(), 10);
+
+  if (!whatsapp || isNaN(puntosRestar) || puntosRestar <= 0) {
+    alert('Datos inválidos.');
+    return;
+  }
+
+  let cliente = buscarCliente(whatsapp);
+  if (!cliente) {
+    alert('Cliente no encontrado.');
+    return;
+  }
+
+  // Si no hay saldo suficiente, no restamos y avisamos claramente
+  if (puntosRestar > cliente.puntos) {
+    alert(`❌ Saldo insuficiente.\nEl cliente ${whatsapp} tiene ${cliente.puntos} pts y no se puede restar ${puntosRestar} pts.`);
+    return;
+  }
+
+  // Resta válida
+  cliente.puntos -= puntosRestar;
+  actualizarTabla();
+  mostrarJSON();
+  alert(`✅ Se restaron ${puntosRestar} pts al cliente ${whatsapp}.\nSaldo actual: ${cliente.puntos} pts.`);
+});
+
+/* --- Mostrar JSON y copiar --- */
+function mostrarJSON() {
+  document.getElementById('nuevoJSON').textContent =
+    "Pegá este JSON en tu archivo puntos.json:\n" + JSON.stringify(clientes, null, 2);
+}
+
+document.getElementById('copiarJSON').addEventListener('click', function() {
+  const jsonStr = JSON.stringify(clientes, null, 2);
+  navigator.clipboard.writeText(jsonStr).then(() => {
+    alert('✅ JSON copiado al portapapeles.');
+  }).catch(err => {
+    console.error('Error copiando JSON:', err);
+    alert('❌ Error copiando JSON.');
+  });
+});
+
+cargarClientes();
+</script>
+
+</body>
+</html>

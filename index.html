@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mc Pizza – Pizzas Caseras, Saludables y Ventas al por Mayor para Eventos</title>
+  <meta name="description" content="Hacé de tu evento una experiencia única con Mc Pizza. Pizzas caseras y saludables, ideales para cumpleaños, reuniones y empresas. Ahora también podés solicitar delivery a domicilio, listo para disfrutar sin salir de tu casa.">
+  <meta name="keywords" content="Mc Pizza, pizzas caseras, pizzas integrales, harina de salvado, pizzas artesanales, opciones saludables, pizzas al por mayor, pizzas para eventos, delivery a domicilio, pedidos a domicilio, cumpleaños, fiestas, reuniones, empresas, Posadas Misiones">
+  <meta name="author" content="Mc Pizza">
+  <meta property="og:title" content="Mc Pizza – Pizzas Caseras, Saludables y Ventas al por Mayor para Eventos" />
+  <meta property="og:description" content="Compartí momentos especiales con Mc Pizza. Pizzas caseras y saludables, ahora también en ventas al por mayor para eventos. El auténtico sabor artesanal, listo para tus reuniones, cumpleaños y fiestas." />
+  <meta property="og:url" content="https://grupomisiones.com.ar/pizza" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="img/logo.jpeg" type="image/x-icon">
+</head>
+
+<body>
+  <header class="header">
+    <img src="img/logo.jpeg" alt="Logo Mc Pizza" class="header-logo">
+    <h1>Mc Pizza</h1>
+    <p class="tagline">Sabores que cuentan historias</p>
+    <nav>
+      <a href="#menu">Menú</a>
+      <a href="#puntos">Mc Puntos</a>
+      <a href="#historia">Nuestra Historia</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <section class="happy-hours">
+    <div class="happy-container">
+      <h2>✨ Happy Hour Mc Pizza ✨</h2>
+      <p>
+        Viví el sabor de nuestras pizzas al mejor precio en un horario pensado para vos.  
+      </p>
+      <p class="horario">⏰ Todos los días de <strong>21:00 a 00:00</strong></p>
+      <p id="mensaje"></p>
+      <div id="contador"></div>
+    </div>
+  </section>
+
+  <section id="puntos" class="puntos-section">
+  <div class="puntos-card">
+    <h2 class="puntos-titulo">Consultá tu saldo de puntos</h2>
+    <p class="puntos-subtitulo">Ingresá tu número de WhatsApp para ver cuántos puntos acumulaste.</p>
+
+    <div class="puntos-form">
+      <input id="whatsappInput" type="text" placeholder="Ej: 3764123456">
+      <button id="consultarBtn">Consultar</button>
+    </div>
+
+    <div id="resultado" class="puntos-resultado"></div>
+
+    <div class="puntos-info">
+      <h3>✨ ¿Cómo funciona el sistema de puntos?</h3>
+      <ul>
+        <li>🛒 Por cada compra de pizza sumás el <strong>20% del valor</strong> en puntos.</li>
+        <li>💰 1 punto equivale a <strong>$1</strong>.</li>
+        <li>🎁 Podés canjear tus puntos por cualquiera de nuestras variedades de pizzas.</li>
+        <li>🤝 Sistema de referidos: si un cliente nuevo es referido por un cliente existente, el nuevo cliente recibe <strong>20%</strong> de la compra y el referido recibe <strong>5%</strong> de la misma compra.</li>
+        <li>⚠️ El referido debe ser un cliente ya registrado; si no se cumple, el nuevo cliente recibe solo el 20% habitual.</li>
+      </ul>
+    </div>
+
+    <div class="puntos-ejemplo">
+      <h3>📌 Ejemplo</h3>
+      <p>Si comprás por <strong>$24.000</strong>, acumulás <strong>$4.800 en puntos</strong> para tu próxima compra.</p>
+      <p>Si además tenés un referido válido, este recibe <strong>$1.200 en puntos</strong> por tu compra.</p>
+    </div>
+  </div>
+</section>
+
+  <section class="menu" id="menu">
+    <h2>Menú</h2>
+    <div class="menu-grid">
+      <div class="pizza-card">
+        <img src="img/salvado muza.png" alt="Pizza Saludable Mozzarella" />
+        <h3>Pizza Saludable Mozzarella</h3>
+        <p>Con masa de harina integral y salvado de trigo, salsa de tomate, queso mozzarella, aceitunas y orégano.</p>
+        <p class="info">8 porciones ..........<z>$9.000</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/salvado napolitana.png" alt="Pizza Saludable Napolitana con Jamón" />
+        <h3>Pizza Saludable Napolitana con Jamón</h3>
+        <p>Con masa de harina integral y salvado de trigo, salsa de tomate, queso, jamón, tomates en rodajas, aceitunas y orégano.</p>
+        <p class="info">8 porciones ..........<z>$11.000</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/muza.png" alt="Pizza Mozzarella" />
+        <h3>Pizza Mozzarella</h3>
+        <p>Con salsa de tomate, queso mozzarella, aceitunas y orégano.</p>
+        <p class="info">8 porciones ..........<z>$8.500</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/napo.png" alt="Pizza Napolitana con Jamón" />
+        <h3>Pizza Napolitana con Jamón</h3>
+        <p>Con salsa de tomate, queso, jamón, tomates en rodajas, aceitunas y orégano.</p>
+        <p class="info">8 porciones ..........<z>$10.500</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/jamon.png" alt="Pizza de Jamón" />
+        <h3>Pizza de Jamón</h3>
+        <p>Con salsa de tomate, queso, jamón, aceitunas y orégano.</p>
+        <p class="info">8 porciones ..........<z>$10.500</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/fugazzeta.png" alt="Pizza Fugazzeta" />
+        <h3>Pizza Fugazzeta</h3>
+        <p>Con salsa de tomate, queso, cebolla, aceitunas y orégano.</p>
+        <p class="info">8 porciones ..........<z>$10.000</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/calabresa.png" alt="Pizza Calabresa" />
+        <h3>Pizza Calabresa</h3>
+        <p>Con salsa de tomate, queso, calabresa, aceitunas y orégano.</p>
+        <p class="info">8 porciones ..........<z>$11.500</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/rucula.png" alt="Pizza de Rúcula" />
+        <h3>Pizza de Rúcula</h3>
+        <p>Con salsa de tomate, queso, rúcula, aceitunas y orégano.</p>
+        <p class="info">8 porciones ..........<z>$10.000</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/mozzarella cuadrada.png" alt="Pizzeta Mozzarella" />
+        <h3>Pizzeta Mozzarella</h3>
+        <p>Con salsa de tomate, queso mozzarella, aceitunas y orégano. 12 cm x 18 cm.</p>
+        <p class="info">1 unidad ..........<z>$4.500</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/napolitana cuadrada.png" alt="Pizzeta Napolitana con Jamón" />
+        <h3>Pizzeta Napolitana con Jamón</h3>
+        <p>Con salsa de tomate, queso, jamón, tomates en rodajas, aceitunas y orégano. 12 cm x 18 cm.</p>
+        <p class="info">1 unidad ..........<z>$4.500</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/fugazzeta cuadrada.png" alt="Pizzeta Fugazzeta" />
+        <h3>Pizzeta Fugazzeta</h3>
+        <p>Con salsa de tomate, queso, cebolla, aceitunas y orégano. 12 cm x 18 cm.</p>
+        <p class="info">1 unidad ..........<z>$4.500</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/calabresa cuadrada.png" alt="Pizzeta Calabresa" />
+        <h3>Pizzeta Calabresa</h3>
+        <p>Con salsa de tomate, queso, calabresa, aceitunas y orégano. 12 cm x 18 cm.</p>
+        <p class="info">1 unidad ..........<z>$4.500</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/coca.png" alt="Coca Cola" />
+        <h3>Coca Cola</h3>
+        <p>Gaseosa Coca Cola en botella no retornable.</p>
+        <p class="info">1.5 L ..........<z>$4.500</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/Sierra de los padres.png" alt="Agua saborizada" />
+        <h3>Agua saborizada</h3>
+        <p>Agua saborizada Sierra de los Padres. Disponible en sabor pomelo y pomelo rosado.</p>
+        <p class="info">2.25 L ..........<z>$3.500</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/Latas.png" alt="Cerveza en lata" />
+        <h3>Cerveza en lata</h3>
+        <p>Cerveza en lata Heineken.</p>
+        <p class="info">473 mL ..........<z>$4.500</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/lata brahma.png" alt="Cerveza en lata" />
+        <h3>Cerveza en lata</h3>
+        <p>Cerveza en lata Brahma.</p>
+        <p class="info">473 mL ..........<z>$2.500</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/361.png" alt="Cerveza en botella" />
+        <h3>Cerveza en botella no retornable</h3>
+        <p>Cerveza en botella 361 </p>
+        <p class="info">1.5 L ..........<z>$3.500</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/benidictino.png" alt="Agua mineral" />
+        <h3>Agua mineral</h3>
+        <p>Agua mineral Benedictino</p>
+        <p class="info">3 L ..........<z>$2.500</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/canciller.png" alt="Vino en botella" />
+        <h3>Vino Canciller</h3>
+        <p>Botella de vino Canciller</p>
+        <p class="info">1125 mL ..........<z>$4.500</z></p>
+      </div>
+      <div class="pizza-card">
+        <img src="img/secco pomelo.png" alt="Gaseosa pomelo" />
+        <h3>Gaseosa Secco</h3>
+        <p>Botella de gaseosa secco. Disponible en sabor pomelo, manzana, pomelo intenso y lima limón.</p>
+        <p class="info">3 L ..........<z>$2.500</z></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="historia" id="historia">
+    <h2>Nuestra Historia</h2>
+    <p>
+      Mc Pizza nació del sueño de compartir algo más que una comida: queríamos ofrecer una experiencia auténtica, sencilla y sabrosa. Lo que comenzó como una idea entre amigos y familia, se transformó en una pasión por la pizza bien hecha, con ingredientes frescos, masa casera elaborada por nosotros mismos y ese toque artesanal que se nota desde el primer bocado.
+    </p>
+    <p>
+      Desde nuestros inicios, apostamos por lo simple pero bien hecho. Cada pizza que preparamos es una muestra de nuestro compromiso con la calidad y el sabor. Ofrecemos nuestras clásicas pizzas caseras tradicionales y, para quienes buscan una opción más saludable, también contamos con masas elaboradas con harina integral y salvado.
+    </p>
+    <p>
+      Hoy seguimos creciendo gracias a nuestros clientes fieles y a cada persona que nos elige para compartir una comida con amigos, en familia o en un momento especial. ¡Gracias por ser parte de esta historia que recién empieza!
+    </p>
+  </section>
+
+  <section id="contacto" class="contacto"> 
+    <h2>📞 Contacto y Pedidos</h2>
+    <div class="opciones-contacto">
+
+      <!-- Mc Pizza I -->
+      <div class="opcion">
+        <h3>🍕 Mc Pizza I</h3>
+        <p><a class="btn-direccion" href="https://maps.app.goo.gl/oZnpdPt3d2v45ssw5" target="_blank">📍 Soria 4629, Posadas, Misiones</a></p>
+        <p>Enviá tu pedido por WhatsApp y sumá puntos con cada pizza que compres. También podés solicitar <strong>delivery a domicilio</strong>.</p>
+        <a class="btn-whatsapp" href="https://wa.me/5493764867541?text=¡Hola! Quiero hacer un pedido de Mc Pizza I." target="_blank">
+          📲 Pedir por WhatsApp
+        </a>
+      </div>
+
+      <!-- Venta al por mayor -->
+    <div class="opcion">
+      <h3>🎉 Ventas para Eventos</h3>
+      <p>¿Tenés un evento, juntada o negocio? Llevate nuestras pizzas caseras y saludables al mejor precio.</p>
+      <ul>
+        <li>🍕 Pedido mínimo: <strong>5 pizzas</strong></li>
+        <li>🚚 Envío gratis dentro de <strong>Posadas</strong></li>
+        <li>⏰ Pedido con <strong>24 hs de anticipación</strong></li>
+        <li>🎁 ¡También sumás puntos con tu compra!</li>
+      </ul>
+      <a class="btn-whatsapp" href="https://wa.me/5493794884299?text=¡Hola! Quiero solicitar presupuesto para eventos de Mc Pizza." target="_blank">
+        📲 Solicitar Presupuesto
+      </a>
+    </div>
+
+    </div>
+  </section>
+
+  <a class="whatsapp-button" href="https://wa.me/5493764867541?text=¡Hola! Quiero obtener más información sobre Mc Pizza." target="_blank">WhatsApp</a>
+
+  <footer class="footer">
+    <p>&copy; 2025 Mc Pizza – Posadas, Misiones.</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
