@@ -431,17 +431,3 @@ select option {
   border-radius: 8px;
   padding: 0.8rem;
 }
-
-/* Estilos del botón flotante de WhatsApp */
-.whatsapp-button {
-    position: fixed;
-    bottom: 2%;
-    right: 2%;
-    width: 15%; /* Ancho cuadrado */
-    height: 15%; /* Altura cuadrada */
-    background-image: url(img/whatsappboton.png); /* Ruta de tu imagen */
-    background-size: cover; /* Para que la imagen se ajuste al botón */
-    text-indent: -9999px; /* Oculta el texto del botón */
-    cursor: pointer;
-    background-position: center; /* Posición centrada de la imagen */
-}
