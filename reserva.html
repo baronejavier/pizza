@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Reserva - Pizza Max 24</title>
+
+<!-- CSS principal embebido -->
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212;
+  color: #f4f4f4;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+header {
+  padding: 1.5rem;
+  text-align: center;
+  border-bottom: 2px solid #e63946;
+  background-image: url(img/portada.jpg);
+  background-size: cover;
+  background-position: center;
+  text-shadow: 
+  1px 1px 2px #000,
+  -1px -1px 2px #000,
+  2px 2px 6px rgba(0, 0, 0, 0.9);
+}
+
+.header-logo {
+    width: 35%;
+    height: auto;
+    border-radius: 100%;
+}
+
+header h1 {
+  font-size: 5rem;
+  color: #fca311;
+  font-family:'Times New Roman', Times, serif;
+  margin-bottom: 0;
+}
+
+header p {
+  color: #e0e0e0;
+  font-style: italic;
+  font-size: 1.5rem;
+}
+
+header .tagline {
+  margin-top: 0;
+}
+
+section {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #fca311;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+z {
+  font-size: 1.5rem;
+  color: #fcec11;
+  text-align: right;
+}
+
+input, button, select {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: bold;
+  border: none;
+  transition: 0.3s;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Formulario y menú de reservas */
+.form-container, .menu-container {
+  background: #1e1e1e;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 900px;
+}
+
+input[type="text"], input[type="date"], input[type="time"], input[type="number"] {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+}
+
+.pizza-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.pizza-card {
+  background: #1c1c1c;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 0 5px #000;
+}
+
+.pizza-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 8px;
+  background-color: #000;
+}
+
+.pizza-card h3 {
+  margin: 10px 0 5px;
+}
+
+.pizza-card p {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.quantity {
+  margin: 10px 0;
+}
+
+.summary {
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.alias {
+  font-weight: bold;
+  color: #ffcc00;
+}
+
+.whatsapp-btn {
+  background-color: #25d366;
+  color: white;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 15px;
+}
+
+.whatsapp-btn:hover {
+  background-color: #1ebe5b;
+}
+
+.hidden { display: none; }
+.error { color: #ff4444; font-weight: bold; }
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+</style>
+</head>
+
+<body>
+<header class="header">
+  <img src="img/logo.jpeg" alt="Logo Pizza Max 24" class="header-logo">
+  <h1>Pizza Max 24</h1>
+  <p class="tagline">Sabores que cuentan historias</p>
+</header>
+
+<section>
+  <div class="form-container" id="form-section">
+    <h2>Reserva tu pedido</h2>
+    <p>Completá los datos del evento (al menos 24 h antes):</p>
+    <input type="text" id="nombre" placeholder="Nombre completo" required>
+    <input type="date" id="fecha" required>
+    <input type="time" id="hora" required>
+    <input type="text" id="direccion" placeholder="Dirección del evento" required>
+    <p class="error" id="fecha-error"></p>
+    <button onclick="validarFecha()">Continuar</button>
+  </div>
+
+  <div class="menu-container hidden" id="menu-section">
+    <h2>Elegí tus pizzas</h2>
+    <p>Pedido mínimo: <strong>5 pizzas</strong></p>
+    <div class="pizza-grid" id="pizza-list"></div>
+
+    <div class="summary">
+      <h3>Resumen del Pedido</h3>
+      <p id="resumen"></p>
+      <p><strong>Total:</strong> $<span id="total">0</span></p>
+      <p><strong>Seña mínima (50%):</strong> $<span id="senia">0</span></p>
+      <p>Alias para transferencia: <span class="alias">grupomisiones.com.ar</span></p>
+      <button class="whatsapp-btn" id="whatsapp-btn" disabled onclick="enviarWhatsApp()">Enviar pedido por WhatsApp</button>
+      <p class="error" id="pedido-error"></p>
+    </div>
+  </div>
+</section>
+
+<script>
+const pizzas = [
+  { nombre: "Pizza Saludable Mozzarella", precio: 9000, img: "img/salvado muza.png" },
+  { nombre: "Pizza Saludable Napolitana con Jamón", precio: 11000, img: "img/salvado napolitana.png" },
+  { nombre: "Pizza Mozzarella", precio: 8500, img: "img/muza.png" },
+  { nombre: "Pizza Napolitana con Jamón", precio: 10500, img: "img/napo.png" },
+  { nombre: "Pizza de Jamón", precio: 10500, img: "img/jamon.png" },
+  { nombre: "Pizza Fugazzeta", precio: 10000, img: "img/fugazzeta.png" },
+  { nombre: "Pizza Calabresa", precio: 11500, img: "img/calabresa.png" },
+  { nombre: "Pizza de Rúcula", precio: 10000, img: "img/rucula.png" }
+];
+
+const pizzaList = document.getElementById("pizza-list");
+const resumenEl = document.getElementById("resumen");
+const totalEl = document.getElementById("total");
+const seniaEl = document.getElementById("senia");
+const whatsappBtn = document.getElementById("whatsapp-btn");
+const pedidoError = document.getElementById("pedido-error");
+
+pizzas.forEach((pizza, i) => {
+  const div = document.createElement("div");
+  div.className = "pizza-card";
+  div.innerHTML = `
+    <img src="${pizza.img}" alt="${pizza.nombre}">
+    <h3>${pizza.nombre}</h3>
+    <p>Precio: $${pizza.precio.toLocaleString("es-AR")}</p>
+    <div class="quantity">
+      <label>Cantidad: </label>
+      <input type="number" id="qty-${i}" min="0" value="0" style="width:60px;">
+    </div>
+  `;
+  pizzaList.appendChild(div);
+  div.querySelector("input").addEventListener("input", actualizarResumen);
+});
+
+function validarFecha() {
+  const nombre = document.getElementById("nombre").value.trim();
+  const fecha = document.getElementById("fecha").value;
+  const hora = document.getElementById("hora").value;
+  const direccion = document.getElementById("direccion").value.trim();
+  const errorEl = document.getElementById("fecha-error");
+
+  if (!nombre || !fecha || !hora || !direccion) {
+    errorEl.textContent = "Completá todos los campos antes de continuar.";
+    return;
+  }
+
+  const fechaEvento = new Date(`${fecha}T${hora}`);
+  const ahora = new Date();
+  const diffHoras = (fechaEvento - ahora) / (1000 * 60 * 60);
+
+  if (diffHoras < 24) {
+    errorEl.textContent = "El pedido debe realizarse con al menos 24 horas de anticipación.";
+    return;
+  }
+
+  errorEl.textContent = "";
+  document.getElementById("form-section").classList.add("hidden");
+  document.getElementById("menu-section").classList.remove("hidden");
+}
+
+function actualizarResumen() {
+  let total = 0;
+  let totalPizzas = 0;
+  let resumen = "";
+
+  pizzas.forEach((pizza, i) => {
+    const qty = parseInt(document.getElementById(`qty-${i}`).value) || 0;
+    if (qty > 0) {
+      total += qty * pizza.precio;
+      totalPizzas += qty;
+      resumen += `${qty} x ${pizza.nombre}\n`;
+    }
+  });
+
+  totalEl.textContent = total.toLocaleString("es-AR");
+  seniaEl.textContent = (total / 2).toLocaleString("es-AR");
+  resumenEl.textContent = resumen ? resumen : "Sin pizzas seleccionadas.";
+
+  if (totalPizzas >= 5) {
+    whatsappBtn.disabled = false;
+    pedidoError.textContent = "";
+  } else {
+    whatsappBtn.disabled = true;
+    pedidoError.textContent = "Debés seleccionar al menos 5 pizzas.";
+  }
+}
+
+function enviarWhatsApp() {
+  const nombre = document.getElementById("nombre").value;
+  const fecha = document.getElementById("fecha").value;
+  const hora = document.getElementById("hora").value;
+  const direccion = document.getElementById("direccion").value;
+  const total = totalEl.textContent;
+  const senia = seniaEl.textContent;
+  const resumen = resumenEl.textContent;
+
+  const mensaje = `Reserva Pizza Max 24
+Nombre: ${nombre}
+Día: ${fecha}
+Hora: ${hora}
+Dirección: ${direccion}
+
+Pedido:
+${resumen}
+
+Total: $${total}
+Seña (50%): $${senia}
+
+Alias para transferencia:
+grupomisiones.com.ar
+
+Adjunto el comprobante de pago de la seña para confirmar pedido.`;
+
+  const url = `https://wa.me/5493764867541?text=${encodeURIComponent(mensaje)}`;
+  window.open(url, "_blank");
+}
+</script>
+</body>
+</html>
