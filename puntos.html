@@ -100,14 +100,14 @@ document.getElementById('formCompra').addEventListener('submit', function(e){
     return;
   }
 
-  const puntosCliente = Math.floor(monto * 0.20);
+  const puntosCliente = Math.floor(monto * 0.10);
   const puntosReferido = Math.floor(monto * 0.05);
 
   let cliente = buscarCliente(whatsapp);
   let referido = whatsappReferido ? buscarCliente(whatsappReferido) : null;
 
   if (!cliente) {
-    // Cliente nuevo → gana siempre 20%
+    // Cliente nuevo → gana siempre 10%
     cliente = { whatsapp: whatsapp, puntos: puntosCliente };
     clientes.push(cliente);
 
@@ -125,7 +125,7 @@ document.getElementById('formCompra').addEventListener('submit', function(e){
       return;
     }
   } else {
-    // Cliente ya existente → solo suma el 20%
+    // Cliente ya existente → solo suma el 10%
     cliente.puntos += puntosCliente;
     actualizarTabla();
     mostrarJSON();
