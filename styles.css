@@ -431,3 +431,30 @@ select option {
   border-radius: 8px;
   padding: 0.8rem;
 }
+
+#banner-eventos {
+  background: linear-gradient(135deg, #ffcc70, #ff9966);
+  color: #222;
+  text-align: center;
+  padding: 40px 20px;
+  border-radius: 12px;
+  margin: 40px auto;
+  max-width: 900px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#banner-eventos .banner-contenido {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+#banner-eventos h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #b22222;
+}
+
+#banner-eventos p {
+  font-size: 1.1em;
+  line-height: 1.6em;
+}

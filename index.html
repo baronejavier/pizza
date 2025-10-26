@@ -7,13 +7,16 @@
   <meta name="description" content="Hacé de tu evento una experiencia única con Pizza Max 24. Pizzas caseras y saludables, ideales para cumpleaños, reuniones y empresas. Ahora también podés solicitar delivery a domicilio, listo para disfrutar sin salir de tu casa.">
   <meta name="keywords" content="Pizza Max 24, pizzas caseras, pizzas integrales, harina de salvado, pizzas artesanales, opciones saludables, pizzas al por mayor, pizzas para eventos, delivery a domicilio, pedidos a domicilio, cumpleaños, fiestas, reuniones, empresas, Posadas Misiones">
   <meta name="author" content="Pizza Max 24">
+  <meta name="robots" content="index, follow">
   <meta property="og:title" content="Pizza Max 24 – Pizzas Caseras, Saludables y Ventas al por Mayor para Eventos" />
   <meta property="og:description" content="Compartí momentos especiales con Pizza Max 24. Pizzas caseras y saludables, ahora también en ventas al por mayor para eventos. El auténtico sabor artesanal, listo para tus reuniones, cumpleaños y fiestas." />
   <meta property="og:url" content="https://grupomisiones.com.ar/pizza" />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://grupomisiones.com.ar/pizza/img/logo.jpeg">
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="img/logo.jpeg" type="image/x-icon">
+
 </head>
 
 <body>
@@ -29,17 +32,20 @@
     </nav>
   </header>
 
-  <section class="happy-hours">
-    <div class="happy-container">
-      <h2>✨ Happy Hour Pizza Max 24 ✨</h2>
-      <p>
-        Viví el sabor de nuestras pizzas al mejor precio en un horario pensado para vos.  
-      </p>
-      <p class="horario">⏰ Todos los días de <strong>21:00 a 00:00</strong></p>
-      <p id="mensaje"></p>
-      <div id="contador"></div>
-    </div>
-  </section>
+  <section id="banner-eventos">
+  <div class="banner-contenido">
+    <h2>🎉 Pizzas para Eventos</h2>
+    <p>
+      En <strong>Pizza Max 24</strong> nos dedicamos exclusivamente a la elaboración de 
+      <strong>pizzas para eventos</strong>, reuniones y celebraciones.
+    </p>
+    <p>
+      Brindamos atención personalizada, combos especiales y un sistema de puntos 
+      para quienes organizan eventos con nosotros 🍕🥂
+    </p>
+  </div>
+</section>
+
 
   <section id="puntos" class="puntos-section">
   <div class="puntos-card">
@@ -124,30 +130,6 @@
         <p class="info">8 porciones ..........<z>$10.000</z></p>
       </div>
       <div class="pizza-card">
-        <img src="img/mozzarella cuadrada.png" alt="Pizzeta Mozzarella" />
-        <h3>Pizzeta Mozzarella</h3>
-        <p>Con salsa de tomate, queso mozzarella, aceitunas y orégano. 12 cm x 18 cm.</p>
-        <p class="info">1 unidad ..........<z>$4.500</z></p>
-      </div>
-      <div class="pizza-card">
-        <img src="img/napolitana cuadrada.png" alt="Pizzeta Napolitana con Jamón" />
-        <h3>Pizzeta Napolitana con Jamón</h3>
-        <p>Con salsa de tomate, queso, jamón, tomates en rodajas, aceitunas y orégano. 12 cm x 18 cm.</p>
-        <p class="info">1 unidad ..........<z>$4.500</z></p>
-      </div>
-      <div class="pizza-card">
-        <img src="img/fugazzeta cuadrada.png" alt="Pizzeta Fugazzeta" />
-        <h3>Pizzeta Fugazzeta</h3>
-        <p>Con salsa de tomate, queso, cebolla, aceitunas y orégano. 12 cm x 18 cm.</p>
-        <p class="info">1 unidad ..........<z>$4.500</z></p>
-      </div>
-      <div class="pizza-card">
-        <img src="img/calabresa cuadrada.png" alt="Pizzeta Calabresa" />
-        <h3>Pizzeta Calabresa</h3>
-        <p>Con salsa de tomate, queso, calabresa, aceitunas y orégano. 12 cm x 18 cm.</p>
-        <p class="info">1 unidad ..........<z>$4.500</z></p>
-      </div>
-      <div class="pizza-card">
         <img src="img/coca.png" alt="Coca Cola" />
         <h3>Coca Cola</h3>
         <p>Gaseosa Coca Cola en botella no retornable.</p>
@@ -215,15 +197,6 @@
     <h2>📞 Contacto y Pedidos</h2>
     <div class="opciones-contacto">
 
-      <div class="opcion">
-        <h3>🍕 Pizza Max 24</h3>
-        <p><a class="btn-direccion" href="https://maps.app.goo.gl/QzKwS7P6uiN4cig66" target="_blank">📍 Soria 4629, Posadas, Misiones</a></p>
-        <p>Enviá tu pedido por WhatsApp y sumá puntos con cada pizza que compres.</p>
-        <a class="btn-whatsapp" href="https://wa.me/5493764867541?text=¡Hola! Quiero hacer un pedido de Pizza Max 24." target="_blank">
-          📲 Pedir por WhatsApp
-        </a>
-      </div>
-
     <div class="opcion">
       <h3>🎉 Ventas para Eventos</h3>
       <p>¿Tenés un evento, juntada o negocio? Llevate nuestras pizzas caseras y saludables al mejor precio.</p>
@@ -231,11 +204,8 @@
         <li>🍕 Pedido mínimo: <strong>5 pizzas</strong></li>
         <li>🚚 Envío gratis dentro de <strong>Posadas</strong></li>
         <li>⏰ Pedido con <strong>24 hs de anticipación</strong></li>
-        <li>🎁 ¡También sumás puntos con tu compra!</li>
       </ul>
-      <a class="btn-whatsapp" href="https://grupomisiones.com.ar/pizza/reserva" target="_blank">
-        📲 Hacer Reserva
-      </a>
+      <a class="btn-whatsapp" role="button" href="https://grupomisiones.com.ar/pizza/reserva" target="_blank">📲 Hacer Reserva</a>
     </div>
     </div>
   </section>
